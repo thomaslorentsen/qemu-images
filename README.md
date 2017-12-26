@@ -1,4 +1,4 @@
-# qemu-images
+# Packer Images
 Qemu images built by packer
 
 ```bash

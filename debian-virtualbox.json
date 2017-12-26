@@ -6,7 +6,7 @@
       "iso_url": "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-9.3.0-amd64-netinst.iso",
       "iso_checksum": "db8ab7871bc2b7d456c4746e706fb5d3",
       "iso_checksum_type": "md5",
-      "ssh_username": "root",
+      "ssh_username": "ansible",
       "ssh_password": "password",
       "shutdown_command": "echo 'packer' | sudo -S shutdown -P now",
       "boot_wait": "5s",
@@ -42,13 +42,20 @@
         "<wait10>",
         "<wait><spacebar><enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10><wait10><wait10><wait10><wait10>",
         "<enter>",
         "<wait><down><enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "<wait><enter>",
         "<wait10><wait10><wait10><wait10><wait10><wait10>",
         "root<enter><wait>password<enter>",
-        "<wait10>apt-get install -y ssh && service sshd start<enter>"
+        "<wait10>",
+        "apt-get install -y ssh net-tools sudo ",
+        "&& groupadd admin ",
+        "&& usermod -a -G admin ansible ",
+        "&& echo 'admin ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers ",
+        "&& /etc/init.d/networking start ",
+        "&& service sshd start<enter>"
       ]
     }
   ]
