@@ -1,0 +1,28 @@
+{
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "guest_os_type": "Ubuntu_64",
+      "iso_url": "http://dl-cdn.alpinelinux.org/alpine/v3.7/releases/x86_64/alpine-virt-3.7.0-x86_64.iso",
+      "iso_checksum": "7c03c0601c015de3e6a55dce124a64cf",
+      "iso_checksum_type": "md5",
+      "ssh_username": "root",
+      "ssh_password": "root",
+      "shutdown_command": "poweroff",
+      "boot_wait": "5s",
+      "boot_command": [
+        "<enter>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>",
+        "<wait>root<enter>",
+        "<wait>passwd<enter><wait>root<enter><wait>root<enter>",
+        "<wait>setup-hostname -n alpine-test<enter>",
+        "<wait>setup-sshd -c openssh<enter>",
+        "<wait>echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config<enter>",
+        "<wait>/etc/init.d/sshd restart<enter>",
+        "<wait>setup-interfaces<enter><wait><enter><wait><enter><wait><enter>",
+        "<wait>/etc/init.d/networking --quiet start<enter>",
+        "<wait10><wait10><wait10><wait10><wait10><wait10>"
+      ]
+    }
+  ]
+}
